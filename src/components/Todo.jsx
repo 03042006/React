@@ -37,14 +37,29 @@ const Todo = () => {
   const handleAdd = (e) => {
     e.preventDefault();
     if (input.trim()) {
-      setTodos([...todos, { text: input, completed: false, id: uuidv4()}]);
-      setInput('');
+      setTodos([...todos, { text: input, completed: false, id: uuidv4() }]);
+      setInput("");
+      // Display the toast
+      const toast = document.getElementById("toast-success");
+      toast.classList.remove("hidden");
+      toast.classList.add("flex")
+      setTimeout(() => {
+        toast.classList.add("hidden");
+        toast.classList.remove("flex")
+      }, 1000);
     }
   };
 
   const handleDelete = (id)=>{
     const newTodos = todos.filter((item)=> item.id !== id);
     setTodos(newTodos);
+    const toast = document.getElementById("toast-danger");
+    toast.classList.remove("hidden");
+    toast.classList.add("flex")
+    setTimeout(() => {
+      toast.classList.add("hidden");
+      toast.classList.remove("flex")
+    }, 1000);
   };
 
   const handleEdit = (id)=>{
@@ -83,6 +98,41 @@ const Todo = () => {
 
   return (
     <>
+      <div id="toast-success" className=" hidden absolute right-[3%] top-[3%] items-center w-full max-w-xs p-4 mb-4 bg-[#15101c] rounded-lg shadow" role="alert">
+          <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-purple-600 ">
+              <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+              </svg>
+              <span className="sr-only">Check icon</span>
+          </div>
+          <div className="ms-3 text-sm font-normal text-purple-700">Item added successfully.</div>
+          <button type="button" className="ms-auto -mx-1.5 -my-1.5 bg-transparent text-purple-900 hover:text-purple-400 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-[#0d0a12] inline-flex items-center justify-center h-8 w-8" data-dismiss-target="#toast-success" aria-label="Close">
+              <span className="sr-only">Close</span>
+              <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+              </svg>
+          </button>
+        </div>
+
+
+      <div id="toast-danger" className=" hidden absolute right-[3%] top-[3%] items-center w-full max-w-xs p-4 mb-4 bg-[#15101c] rounded-lg shadow" role="alert">
+        <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-purple-600  rounded-lg">
+            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+            </svg>
+            <span className="sr-only">Error icon</span>
+        </div>
+        <div className="ms-3 text-sm font-normal text-purple-700">Item has been deleted.</div>
+        <button type="button" className="ms-auto -mx-1.5 -my-1.5 bg-transparent text-purple-900 hover:text-purple-400 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-[#0d0a12] inline-flex items-center justify-center h-8 w-8" data-dismiss-target="#toast-danger" aria-label="Close">
+            <span className="sr-only">Close</span>
+            <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+      </div>
+
+
+
       <div className="text-white w-full h-screen flex flex-col items-center overflow-x-hidden">
         <form className="form m-3 mt-16 p-3 h-min w-1/2 text-center justify-center flex flex-row gap-1">
           <input
@@ -96,7 +146,7 @@ const Todo = () => {
             className="bg-purple-600 p-1 px-3 text-center text-xl border-none rounded-lg"
             onClick={handleAdd}
           >
-            +
+            <img src="./src/assets/add.svg" alt="Add" />
           </button>
         </form>
         <h2 className="text-left">Tasks - {todos.length} </h2>
