@@ -146,7 +146,7 @@ const Todo = () => {
             className="bg-purple-600 p-1 px-3 text-center text-xl border-none rounded-lg"
             onClick={handleAdd}
           >
-            <img src="./public/assets/add.svg" alt="Add" />
+            <img src="/add.svg" alt="Add" />
           </button>
         </form>
         <h2 className="text-left">Tasks - {todos.length} </h2>
@@ -213,11 +213,11 @@ const Todo = () => {
                       {todo.completed ? (
                         <>
                         <button onClick={() => handleStatus(todo.id)}>
-                          <img src="./public/assets/back.svg" alt="undo" />
+                          <img src="/back.svg" alt="undo" />
                         </button>
                         <button onClick={() => handleDelete(todo.id)}>
                         <img
-                          src="./public/assets/del.svg"
+                          src="/del.svg"
                           alt="Delete"
                           className="w-6"
                         />
@@ -227,21 +227,21 @@ const Todo = () => {
                         <>
                           <button onClick={() => handleEdit(todo.id)}>
                             <img
-                              src="./public/assets/pen.svg"
+                              src="/pen.svg"
                               alt="Edit"
                               className="w-6"
                             />
                           </button>
                           <button onClick={() => handleDelete(todo.id)}>
                             <img
-                              src="./public/assets/del.svg"
+                              src="/del.svg"
                               alt="Delete"
                               className="w-6"
                             />
                           </button>
                           <button onClick={() => handleStatus(todo.id)}>
                             <img
-                              src="./public/assets/tick.svg"
+                              src="/tick.svg"
                               alt="Mark"
                               className="w-6"
                             />
