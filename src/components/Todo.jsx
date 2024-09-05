@@ -134,7 +134,7 @@ const Todo = () => {
 
 
       <div className="text-white w-full h-screen flex flex-col items-center overflow-x-hidden">
-        <form className="form m-3 mt-16 p-3 h-min w-1/2 text-center justify-center flex flex-row gap-1">
+        <form className="form m-3 mt-16 p-3 h-min w-1/2  text-center justify-center flex flex-row gap-1 ">
           <input
             value={input}
             onChange={handleChange}
@@ -146,12 +146,12 @@ const Todo = () => {
             className="bg-purple-600 p-1 px-3 text-center text-xl border-none rounded-lg"
             onClick={handleAdd}
           >
-            <img src="/add.svg" alt="Add" />
+            <img className='' src="/add.svg" alt="Add" />
           </button>
         </form>
         <h2 className="text-left">Tasks - {todos.length} </h2>
 
-        <div className="tabs w-1/2 min-h-[4rem] flex justify-between gap-4 mt-4 p-3">
+        <div className="tabs w-1/2 min-h-[4rem] flex justify-between gap-4 mt-4 p-3 md:w-3/4">
           <button
             className={`tab-button ${activeTab === "all" ? "active line" : ""}`}
             onClick={() => setActiveTab("all")}
@@ -176,7 +176,7 @@ const Todo = () => {
           </button>
         </div>
 
-        <div className="todos w-1/2 h-3/4 mt-8">
+        <div className="todos w-1/2 h-3/4 mt-8 md:w-3/4 ">
           <ul className="h-full flex flex-col gap-4">
             {filteredTodos.map((todo) => (
               <li
@@ -185,7 +185,7 @@ const Todo = () => {
               >
                 {editingId === todo.id ? (
                   <input
-                    className="bg-transparent outline-none"
+                    className="bg-transparent outline-none todo-text"
                     type="text"
                     value={editInput}
                     onChange={(e) => setEditInput(e.target.value)}
@@ -203,10 +203,8 @@ const Todo = () => {
                   {editingId === todo.id ? (
                     <>
                       {" "}
-                      <button onClick={() => saveTodo(todo.id)}>Save</button>
-                      <button onClick={() => handleCancel(todo.id)}>
-                        Cancel
-                      </button>{" "}
+                      <button className='editbtns' onClick={() => saveTodo(todo.id)}>Save</button>
+                      <button className='editbtns' onClick={() => handleCancel(todo.id)}>Cancel</button>{" "}
                     </>
                   ) : (
                     <>
@@ -241,6 +239,7 @@ const Todo = () => {
                           </button>
                           <button onClick={() => handleStatus(todo.id)}>
                             <img
+                              title='Complete'
                               src="/tick.svg"
                               alt="Mark"
                               className="w-6"
